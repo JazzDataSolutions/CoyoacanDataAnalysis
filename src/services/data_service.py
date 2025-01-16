@@ -11,9 +11,9 @@ import geopandas as gpd
 from geopandas import GeoDataFrame
 from typing import Dict, List
 
-from data_access.data_loader import PostgresGeoDataLoader
-from data_access.data_processor import GeoDataProcessor
-from domain.domain_models import DashboardFilters
+from src.data_access.data_loader import PostgresGeoDataLoader
+from src.data_access.data_processor import GeoDataProcessor
+from src.domain.domain_models import DashboardFilters
 
 logger = logging.getLogger(__name__)
 
@@ -82,6 +82,7 @@ class DataService:
 
         print(f"ANTES gdf filtrado por anio: filters.anio == {filters.anio}")
         print(gdf)
+
         # 1. Filtrar por año
         #gdf = GeoDataProcessor\
         #    .filtrar_por_anio(gdf, filters.anio)
@@ -97,19 +98,24 @@ class DataService:
         # 2. Agrupar por granularidad si hay una columna que la maneje
         
         if filters.granularidad == "ageb":
+
             agrupa = columnas_fijas + metricas
             agrupa += ["ID_AGEB", "GEOM_AGEB"]
             gdf = gdf.groupby(list(set(agrupa)))\
-                .first().reset_index()
+                        .first()\
+                        .reset_index()
+            
             gdf = gdf[list(set(agrupa))]
             gdf = gdf.set_geometry("GEOM_AGEB")
 
         elif filters.granularidad == "colonia":
-            if filters.type_data == "demofraficos":
+
+            if filters.type_data == "demograficos":
+
                 agrupa = columnas_fijas + metricas
                 agrupa += ["ID_COLONIA", "GEOM_COLONIA"]
                 gdf = gdf.groupby(list(set(agrupa)))\
-                    .first().reset_index()
+                            .first().reset_index()
                 gdf = gdf[list(set(agrupa))]
                 gdf = gdf.set_geometry("GEOM_COLONIA")
 

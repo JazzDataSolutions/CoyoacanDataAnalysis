@@ -58,10 +58,16 @@ class LayoutBuilder:
         ])
 
     def create_demograficos_page(self, anios: List[int]) -> html.Div:
+        page = dcc.Loading(
+            id = "loading-1",
+            type = "default",
+            children = html.Div(id = "mapa-plotly")
+        )
+
         return html.Div([
             html.H3("Rubro: Tablero de Demográfico"),
             self.create_filter_row(anios),
-            html.Div(id="mapa-plotly")
+            page
         ])
 
     def create_edafologicos_page(self, anios: List[int]) -> html.Div:

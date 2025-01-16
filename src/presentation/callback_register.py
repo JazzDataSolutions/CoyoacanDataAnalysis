@@ -3,17 +3,17 @@ import random
 from typing import Optional
 from pandas import DataFrame, merge
 from dash import Dash, html, dcc, Input, Output
-from services.data_service import DataService
-from domain.domain_models import TableController
+from src.services.data_service import DataService
+from src.domain.domain_models import TableController
 
-from domain.domain_models import (
+from src.domain.domain_models import (
     DashboardFilters,
     MapVisualizationConfig,
     AVAILABLE_COLOR_SCHEMES
 )
 
-from figures.figures_utils import FiguresGenerator
-from presentation.layout_builder import LayoutBuilder
+from src.figures.figures_utils import FiguresGenerator
+from src.presentation.layout_builder import LayoutBuilder
 
 logger = logging.getLogger(__name__)
 
@@ -203,6 +203,7 @@ class CallbackRegister:
                 
             elif gran == 'colonia':
                 if dataset_key == "demograficos":
+
                     self.gdf_poligonos_data = merge(
                         self.poligonos_colonia, 
                         self.data,
@@ -219,6 +220,7 @@ class CallbackRegister:
                         how = 'left')
                     
             elif gran == 'ageb':
+
                 if dataset_key == "demograficos":
                     self.gdf_poligonos_data = merge(
                         self.poligonos_ageb, 
@@ -249,10 +251,10 @@ class CallbackRegister:
             )
 
 
-            gdf_filtrado = self.data_service\
-                .obtener_datos_filtrados(dataset_key, 
-                    gdf = self.gdf_poligonos_data,
-                    filters = filters)
+            gdf_filtrado = self.data_service.obtener_datos_filtrados(
+                                dataset_key, 
+                                gdf = self.gdf_poligonos_data,
+                                filters = filters)
 
             if gdf_filtrado.empty:
                 return html.Div("No se encontraron datos para los filtros seleccionados.")
@@ -266,7 +268,7 @@ class CallbackRegister:
                 if c not in ("geometry",
                              "GEOM_MANZANA",
                              "GEOM_AGEB",
-                             "GEOM_COLONIA"
+                             "GEOM_COLONIA",
                              "anio") and\
                     gdf_filtrado[c].dtype.kind in ["i", "f"]
             ]

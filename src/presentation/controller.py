@@ -1,10 +1,9 @@
 from typing import Optional
 import dash
 import dash_bootstrap_components as dbc
-
-from services.data_service import DataService
-from presentation.layout_builder import LayoutBuilder
-from presentation.callback_register import CallbackRegister
+from src.services.data_service import DataService
+from src.presentation.layout_builder import LayoutBuilder
+from src.presentation.callback_register import CallbackRegister
 
 
 class DashAppController:

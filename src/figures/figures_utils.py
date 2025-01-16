@@ -8,8 +8,7 @@ import geopandas as gpd
 from geopandas import GeoDataFrame
 import plotly.express as px
 from typing import Any, Optional
-from domain.domain_models import MapVisualizationConfig
-import dash_leaflet as dl
+from src.domain.domain_models import MapVisualizationConfig
 import json
 
 
