@@ -1,2 +1,8 @@
 .env
 coyo/
+presentation/__pycache__/
+infrastructure/db/__pycache__/
+domain/__pycahce__/
+core/interfaces/__pycache__/
+core/services/__pycache__
+

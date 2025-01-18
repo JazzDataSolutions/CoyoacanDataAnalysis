@@ -62,24 +62,36 @@ El proyecto está organizado de la siguiente manera:
 
 ```
 Coyoacan_Analysis/
-│
-├── data/                         # Carpeta para almacenar todos los datos descargados
-│   ├── economicos/               # Subcarpeta para datos económicos
-│   ├── electorales/              # Subcarpeta para datos electorales
-│   ├── georeferenciados/         # Subcarpeta para datos georreferenciados
-│   └── naturales/                # Subcarpeta para datos de recursos naturales
-│
-├── scripts/                      # Carpeta para scripts de Python
-│   ├── data_cleaning.py          # Script para limpieza y preparación de datos
-│   ├── analysis.py               # Script principal de análisis
-│   ├── visualizations.py         # Script para crear visualizaciones
-│   └── compile_report.py         # Script para compilar las visualizaciones en PDF
-│
-├── outputs/                      # Carpeta para resultados y productos finales
-│   ├── figures/                  # Subcarpeta para figuras generadas
-│   └── reports/                  # Subcarpeta para reportes en PDF
-│
-└── README.md                     # Documento para describir el proyecto y cómo ejecutarlo
+.
+├── app.py
+├── core
+│   ├── interfaces
+│   │   └── data_loader_interface.py
+│   └── services
+│       ├── data_service_proxy.py
+│       └── data_service.py
+├── coyo
+│   └── include
+│       └── python3.11
+├── domain
+│   ├── models.py
+│   └── table_controller.py
+├── infrastructure
+│   └── db
+│       ├── data_connection.py
+│       ├── data_loader_postgres.py
+│       ├── data_processor.py
+│       └── singleton_connection.py
+├── presentation
+│   ├── callback_register.py
+│   ├── controller.py
+│   ├── figures_utils.py
+│   └── layout_builder.py
+├── README.md
+├── requirements.txt
+└── tests
+    └── test_data_service.py
+
 ```
 
 ## Requisitos

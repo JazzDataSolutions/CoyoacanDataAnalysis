@@ -4,7 +4,6 @@ Define entidades (dataclasses) que representan el dominio de la aplicación.
 """
 from dataclasses import dataclass, field
 from typing import Optional, List
-import random
 
 # Lista de esquemas de colores disponibles
 AVAILABLE_COLOR_SCHEMES = [
@@ -31,46 +30,11 @@ AVAILABLE_COLOR_SCHEMES = [
 ]
 
 @dataclass
-class TableController:
-    poligonos: object = field(init = False)
-    demograficos: object = field(init = False)
-    edafologicos: object = field(init = False)
-    electorales: object = field(init = False)
-    servicios: object = field(init = False)
-    ambientales: object = field(init = False)
-
-    def __post_init__(self):
-        self.poligonos_manzana = {
-            "table_name": "poligonos_manzanas_agebs_colonias",
-            "geom_column": "GEOM_MANZANA"
-        }
-
-        self.poligonos_ageb = {
-            "table_name": "poligonos_manzanas_agebs_colonias",
-            "geom_column": "GEOM_AGEB"
-        }
-
-        self.poligonos_colonia = {
-            "table_name": "poligonos_manzanas_agebs_colonias",
-            "geom_column": "GEOM_COLONIA"
-        }
-
-        self.demograficos = {
-            "table_name": "datos_demograficos_particionada",
-            "geom_column": "geometry"
-        }
-
-        self.edafologicos = {
-            "table_name": "datos_edafologicos_particionada",
-            "geom_column": "GEOM_MANZANA"
-        }
-
-@dataclass
 class MapVisualizationConfig:
     titulo: str
     columna_metrica: str
     hover_columns: List[str]  # Lista de columnas para mostrar en el tooltip
-    esquema_color: str 
+    esquema_color: str
     nombre_hover: str = None   # Nombre para el hover principal
     titulo_colorbar: str = "#000000"
     zoom: int = 13
@@ -78,6 +42,7 @@ class MapVisualizationConfig:
     longitud_centro: float = -99.143209
     mapbox_style: str = "open-street-map"  # Estilo por defecto
             
+
 
 @dataclass
 class DashboardFilters:
